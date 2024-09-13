@@ -64,15 +64,24 @@ public final class ReactorCallAdapterFactory extends CallAdapter.Factory {
      * Returns an instance which creates synchronous observables. Applying
      * {@link Flux#subscribeOn} has no effect on stream types created by this factory.
      */
-    public static ReactorCallAdapterFactory createSynchronous() {
+    public static ReactorCallAdapterFactory createSync() {
         return new ReactorCallAdapterFactory(null, false);
+    }
+
+    /**
+     * Returns an instance which creates asynchronous observables that
+     * {@linkplain Flux#subscribeOn(Scheduler) subscribes on} {@code scheduler} by default.
+     */
+    public static ReactorCallAdapterFactory createWithScheduler(Scheduler scheduler) {
+        if (scheduler == null) throw new NullPointerException("scheduler == null");
+        return new ReactorCallAdapterFactory(scheduler, true);
     }
 
     /**
      * Returns an instance which creates synchronous observables that
      * {@linkplain Flux#subscribeOn(Scheduler) subscribes on} {@code scheduler} by default.
      */
-    public static ReactorCallAdapterFactory createWithScheduler(Scheduler scheduler) {
+    public static ReactorCallAdapterFactory createSyncWithScheduler(Scheduler scheduler) {
         if (scheduler == null) throw new NullPointerException("scheduler == null");
         return new ReactorCallAdapterFactory(scheduler, false);
     }
@@ -123,6 +132,6 @@ public final class ReactorCallAdapterFactory extends CallAdapter.Factory {
             isBody = true;
         }
 
-        return new ReactorCallAdapter(responseType, scheduler, isAsync, isResult, isBody, isMono);
+        return new ReactorCallAdapter<>(responseType, scheduler, isAsync, isResult, isBody, isMono);
     }
 }

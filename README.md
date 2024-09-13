@@ -4,4 +4,50 @@
 
 
 # call-adapter-reactor
-Asynchronous Request Call Adapter for Retrofit Implementation Based on Java Reactor Framework
+Request Call Adapter for Retrofit Implementation Based on Java Reactor Framework
+
+## Usage
+Maven:
+```xml
+<dependency>
+  <groupId>io.github.easyretrofit</groupId>
+  <artifactId>adapter-reactor</artifactId>
+  <version>${latest.version}</version>
+</dependency>
+```
+Gradle:
+```groovy
+implementation 'io.github.easyretrofit:adapter-reactor:${latest.version}'
+```
+
+### used with easy-retrofit
+
+#### create ReactorCallAdapterFactoryBuilder class
+```java
+public class ReactorCallAdapterFactoryBuilder extends BaseCallAdapterFactoryBuilder {
+    @Override
+    public CallAdapter.Factory buildCallAdapterFactory() {
+        return ReactorCallAdapterFactory.create();
+    }
+}
+
+```
+#### add ReactorCallAdapterFactoryBuilder to your RetrofitBuilder
+```java
+@RetrofitBuilder(baseUrl = "${app.backend.url}",
+        addCallAdapterFactory = {ReactorCallAdapterFactoryBuilder.class})
+public interface MyService {
+    
+}
+```
+
+### used with retrofit2
+```java
+Retrofit retrofit = new Retrofit.Builder()
+        .baseUrl(server.url("/"))
+        .addCallAdapterFactory(ReactorCallAdapterFactory.create())
+        .build();
+```
+
+
+
