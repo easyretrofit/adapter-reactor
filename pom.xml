@@ -13,7 +13,7 @@
     <packaging>jar</packaging>
     <description>retrofit adapter support reactor</description>
     <artifactId>adapter-reactor</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0-SNAPSHOT</version>
 
     <url>https://github.com/easyretrofit/${project.artifactId}</url>
 
@@ -32,6 +32,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.13.2</junit.version>
         <retrofit.version>2.11.0</retrofit.version>
+        <easyretrofit.core.version>1.1.2-SNAPSHOT</easyretrofit.core.version>
         <reactor.core.version>3.6.4</reactor.core.version>
         <commons.lang3.version>3.14.0</commons.lang3.version>
         <junit.version>4.13.2</junit.version>
@@ -43,6 +44,12 @@
             <artifactId>retrofit</artifactId>
             <scope>provided</scope>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>io.github.easyretrofit</groupId>-->
+<!--            <artifactId>core</artifactId>-->
+<!--            <version>${easyretrofitr.core.version}</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>io.projectreactor</groupId>
